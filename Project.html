@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+    <link rel="stylesheet" href="./Project.css">
+    
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+</head>
+<body>
+    <div>
+      
+       
+    </div>
+    <form action="./index.html">
+    <input type="submit" value=" Home page">
+</form>
+<script>
+    let div= document.getElementsByTagName('div')[0];
+
+// console.log(div);
+let ajax=new XMLHttpRequest();
+ajax.open("GET","https://fakestoreapi.com/products");
+ajax.send();
+ajax.onload=()=>{
+    let data=JSON.parse(ajax.response);
+    data.forEach(element => {
+        let section=document.createElement('section');
+        div.appendChild(section);
+         div.appendChild(section);
+         console.log(section);
+        section.innerHTML=`<img style="width:150px" src=${element.image}>
+        <p id="a">${element.id}</p>
+        <p id="b">Title:${element.title}</p>
+        <p id="c">Category: ${element.category}</p>
+        <p id="d">Price:${element.price}</p> 
+        <a href="./viewpage.html"><button onclick="send(${element.id})">view</button></a>`;
+            
+    })
+  
+     }
+   function send(id){
+         var idvalue=id;
+        var selectitem={id:idvalue};
+        sessionStorage.setItem("selectitem",JSON.stringify(selectitem));
+        // console.log(JSON.parse(sessionStorage.getItem("selectitem")));
+       }
+</script>
+</body>
+</html>

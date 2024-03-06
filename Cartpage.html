@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartpage</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            background-color: rgb(224, 191, 197);
+        }
+        div{
+            width: 700px;
+            height: 550px;
+            background-color: rgb(225, 191, 196);
+            position: relative;
+            top: 13px;
+          
+        
+        }
+        #details{
+            background-color: white;
+            height: 450px;
+            width: 600px;
+            /* height: 300px; */
+             position: relative;
+            bottom: 75px;
+             
+
+        }
+        /* #pic{
+            background-color:whitesmoke;
+            border: 2px solid black;
+            height: 200px;
+            
+
+
+        } */
+        #ima{
+          height: 200px;
+          position: relative;
+          left: 90px;
+         
+        }
+        #order{
+            position: relative;
+            left: 60px;
+            bottom: 20px;
+            background-color: cornflowerblue;
+            border-radius: 3px;
+            width: 80px;
+            height: 30px;
+        }
+        #delete{
+            position: relative;
+            left: 140px;
+            height: 30px; 
+            border-radius: 3px;
+            background-color: blue;
+        }
+        #home{
+            position: relative;
+            left: 200px;
+            top: 30px;
+            border-radius: 5px;
+            background-color: pink;
+            height: 30px;
+        }
+        #result{
+            font-size: 30px;
+            color: blue;
+            position: relative;
+            top: 50px;
+            left: 90px;
+            
+        }
+         #place{
+            position: relative;
+            left: 200px;
+            top: 30px;
+            color: green;
+            font-size: 20px;
+        } 
+        #cart{
+            font-size: 30px;
+            font-weight: 30px;
+            position: relative;
+            top: 20px;
+        }
+        h3{
+            position: relative;
+            top: 200px;
+            left: 90px;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        
+        <p id="cart">Cart Items</p>
+        <ul id="list">
+        <p id="result"></p>
+       <a href="./Project.html"> <button id="home">Back to products page</button></a>
+        
+        <div id="details">
+           
+        </div>  
+    </ul>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded",function(){
+
+       
+    //    let picture=document.getElementById('pic');
+       let detail=document.getElementById('details');
+       let ul=document.getElementById('list');
+       
+        let cartlist=JSON.parse(sessionStorage.getItem("caritem"));
+      
+       console.log(cartlist);
+       if(!cartlist){
+        window.alert("no items found....");
+         detail.innerHTML=`<h3 style="color:green">Add Your Cart items.... </h3>`;
+        
+       }
+        var url=`https://fakestoreapi.com/products/${cartlist.id}`;
+       console.log(url);
+       var ajax=new  XMLHttpRequest();
+       ajax.open("GET",url);
+       ajax.send();
+       ajax.onload= function(){
+        if (ajax.status===200){
+             let data=JSON.parse(ajax.response);
+             console.log(data);
+            //  let section=document.createElement('section');
+            //  picture.innerHTML=<img  style="width:150px;" id="ima"src=${data.image}>;
+            detail.innerHTML=`<img  id="ima" src=${data.image}> <p id="title">Title:${data.title}</p>
+              <p id="category">Category:${data.category}</p>
+              <p id="price">Price:&nbsp${data.price}</p>
+              
+              
+                <button id="order" onclick="order()">Order</button><button id="delete" onclick="remove(this)">Delete</button><p id="place"></p>`;
+             
+               ul.appendChild(detail);
+               console.log(ul);
+
+        }
+      
+    }
+})
+function remove(button)
+{
+    var listval=button.parentNode;
+    listval.remove();
+    let result= document.getElementById('result');
+    result.innerText="Your Cart is Empty....";
+}
+function order(){
+    let place=document.getElementById('place');
+    place.innerText="Order is placed Successfully.....🥳";
+    let final=document.getElementById('order');
+    final.textContent="Orderplaced";
+    final.style.height=180;
+    final.style.backgroundColor="green";
+ 
+}
+
+
+          
+    </script>
+</body>
+</html>

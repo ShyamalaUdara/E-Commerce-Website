@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+       div{
+        width: 300px;
+        height: 270px;
+        background-color: paleturquoise;
+        border-radius: 5px;
+        position: relative;
+        top: 250px;
+        left: 450px;
+       }
+       #label{
+        position: relative;
+        top: 60px;
+        left: 30px;
+       }
+       #inlog{
+           border-radius: 5px;
+           height: 18px;
+       }
+       #outlog{
+        border-radius: 5px;
+           height: 18px
+       }
+       #login{
+        position: relative;
+        top: 90px;
+        left: 120px;
+        width: 100px;
+        height: 25px;
+        background-color: green;
+        border-radius: 3px;
+       }
+       body{
+        background-color: rgb(169, 219, 238);
+    
+       }
+
+    </style>
+</head>
+<body>
+    <form action="./index.html">
+    <div id="logindiv">
+        <label for="Eamil" id="label">Email-Id: <input type="text" placeholder="Enter Your Email" id="inlog"></label>
+        <br><br>
+        <label for="password" id="label">Password: <input type="Password" placeholder="Enter your Password" id="outlog"></label>
+        <br>
+      
+        <input type="submit" value="Login" id="login" onclick="validation()">
+   
+
+    </div>
+    </form>
+    <script >
+        function validation(){
+        let email=document.getElementsByTagName('input')[0].value;
+        let password=document.getElementsByTagName('input')[1].value;
+        let getmail=localStorage.getItem('isemail');
+        let getpassword=localStorage.getItem('ispass')
+        if (email!=getmail){
+            alert("please provide valid Email-id");
+            
+           
+        }
+        // else if (password!=getpassword){
+        //     alert("Please provide correct password");
+           
+        // }
+        else{
+            alert("login successfully....");
+          
+        }
+       
+    }    
+    </script>
+     
+   
+    
+</body>
+</html>
